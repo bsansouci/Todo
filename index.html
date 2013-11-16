@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="todo-app">
+    <header id="header">
+      <input id="new-todo" placeholder="What needs to be done?" autofocus>
+    </header>
+    <section id="main">
+      <input id="toggle-all" type="checkbox">
+      <ul id="todo-list">
+      </ul>
+    </section>
+    <footer id="footer">
+    </footer>
+  </div>
+
+  <script type="text/template" id="todo-template">
+    <div class="todo">
+      <input class="toggleComplete" type="checkbox" <%= completed ? 'checked' : '' %>>
+      <label><%- visible.content %></label>
+      <button class="destroy"></button>
+    </div>
+  </script>
+  <script type="text/template" id="properties-template">
+    <button class="close">X</button>
+    <span id="indicator"><</span>
+    <table>
+    <% for(var i = dataToShow.length - 1; i >= 0; i--) { %>
+      <tr>
+        <td class="propertiesLabel"><%= dataToShow[i].name %>: </td>
+        <td>
+        <input type="text" name="<%= dataToShow[i].name %>" value="<%= dataToShow[i].value %>"></input>
+        </td>
+      </tr>
+    <% } %>
+    </table>
+  </script>
+  <script type="text/template" id="tools-template">
+  <span id="todo-count"> <strong><%= remaining %></strong> <%= remaining <= 1 ? 'item' : 'items' %> left</span>
+    <ul id="tools">
+    <li>
+      <a class="selected" href="#/">All</a>
+    </li>
+    <% for (var i = allTools.length - 1; i >= 0; i--) { %>
+          <li>
+            <a href="#/<%= allTools[i].href %>" > <%= allTools[i].name %></a>
+          </li>
+      <% }; %>
+    </ul>
+    <% if (completed) { %>
+      <button id="clear-completed">Clear completed (<%= completed %>)</button>
+      <% } %>
+  </script>
+
+
+
+  <script src="bower_components/todomvc-common/base.js"></script>
+    <script src="bower_components/jquery/jquery.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
+    <script src="bower_components/backbone/backbone.js"></script>
+    <script src="bower_components/backbone.localStorage/backbone.localStorage.js"></script>
+
+<script src="todo.js"></script>
+<script src="todos.js"></script>
+<script src="todoView.js"></script>
+<script src="todoPropertiesView.js"></script>
+
+<script src="appView.js"></script>
+<script src="router.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
